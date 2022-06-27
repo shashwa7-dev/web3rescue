@@ -1,6 +1,7 @@
 import { Route, Routes } from "react-router-dom";
 import Step1 from "./Step1.jsx";
 import Step2 from "./Step2.jsx";
+import Step3 from "./Step3.jsx";
 import styled from "styled-components";
 import Timeline from "../Components/Timeline.jsx";
 import { useGCtx } from "../Context/context.jsx";
@@ -8,6 +9,7 @@ import { useGCtx } from "../Context/context.jsx";
 const AppContainer = styled.div`
   width: 100%;
   max-width: 1010px;
+  overflow: hidden;
   padding: clamp(1rem, 3vw, 2rem);
   display: grid;
   place-items: center;
@@ -27,7 +29,12 @@ export default function Web3Rescue() {
       <Timeline stage={step} />
       <Routes>
         <Route exact path="/" element={<Step1 />} />
-        <Route exact path="/" element={<Step2 />} />
+        <Route exact path="/step2" element={<Step2 />} />
+        <Route
+          exact
+          path="/step3/:rescueToken/:paymentId"
+          element={<Step3 />}
+        />
       </Routes>
     </AppContainer>
   );

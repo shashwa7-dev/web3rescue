@@ -23,7 +23,7 @@ const TimelineCtr = styled.div`
       background: linear-gradient(268.5deg, #fb03f5 -11.69%, #aa9cff 112.48%);
       padding: 0.1rem;
       margin-right: auto;
-      transition: all 0.3s ease;
+      transition: all 1s ease;
     }
     .check_points {
       width: 100%;

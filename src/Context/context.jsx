@@ -32,7 +32,9 @@ export default function GlobalContextProvider({ children }) {
     safeAddress
   ) => {
     setLoading(true);
-    console.log(`data:${userwalletaddress}, ${contractaddress}, ${safeAddress}`);
+    console.log(
+      `data:${userwalletaddress}, ${contractaddress}, ${safeAddress}`
+    );
     try {
       const url = `https://api.web3rescue.com/rescue/fetch-transactiondata`;
       const data = {
@@ -43,6 +45,7 @@ export default function GlobalContextProvider({ children }) {
       const datafromresponse = await axios.post(url, data);
       const tx = await datafromresponse.data;
       console.log("tx", tx);
+      localStorage.setItem("raw_tx", JSON.stringify(tx));
       setLoading(false);
       setStep(1);
       return tx;
@@ -55,7 +58,6 @@ export default function GlobalContextProvider({ children }) {
   //STEP 2: mthds
   //@api_call: 1
   const signSingleFlashbotTransaction = async (tx2, privatekey) => {
-    console.log("Tx, pk", tx2, privatekey);
     setLoading(true);
     try {
       const provider = new ethers.providers.JsonRpcProvider(
@@ -106,7 +108,7 @@ export default function GlobalContextProvider({ children }) {
       return tx;
     } catch (err) {
       setLoading(false);
-      console.log("Error:", err.message);
+      console.log("Error:", err.data);
     }
   };
 

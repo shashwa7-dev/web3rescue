@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css2?family=Source+Code+Pro&display=swap");
+
 *,
 *::after,
 *::before {
@@ -21,10 +23,13 @@
 }
 
 :root {
+  --max-width: 650px;
+  --field-bg: rgba(176, 176, 176, 0.3);
+  --font-source-code: "Source Code Pro", monospace;
   --font-rg: hellix-400, monospace;
   --font-m: hellix-500, monospace;
   --font-b: hellix-700, monospace;
-
+  --color-imp: #fb03f5;
   --color-gd: linear-gradient(268.5deg, #fb03f5 -11.69%, #aa9cff 112.48%);
 }
 /* Remove default margin */
@@ -86,7 +91,7 @@ input[type="search"]::-webkit-search-cancel-button {
   background: url("./Assets/Images/cross.svg") no-repeat;
   filter: invert(1);
   cursor: pointer;
-  margin-left: .5rem;
+  margin-left: 0.5rem;
 }
 
 /* Remove all animations, transitions and smooth scroll for people that prefer not to see them */

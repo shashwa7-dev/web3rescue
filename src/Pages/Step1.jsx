@@ -1,5 +1,7 @@
 import React from "react";
+import { useEffect } from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { arrowD_icon, copy_icon } from "../Assets/assets";
 import { PageBtn, PageForm, PageInput, PageTitle } from "../Components/commons";
@@ -81,6 +83,7 @@ const Step1Ctr = styled.div`
 `;
 export default function Step1() {
   const {
+    setStep,
     contractAddress,
     userData,
     setUserData,
@@ -88,6 +91,7 @@ export default function Step1() {
     generateERC20Transferdata,
   } = useGCtx();
 
+  const navigate = useNavigate(null);
   const [addressCopied, setAddressCopied] = useState(false);
 
   //to generate ellipses in middle of address text
@@ -113,6 +117,7 @@ export default function Step1() {
       ...userData,
       final_data: finalData,
     });
+    navigate("/step2");
   };
 
   const handleStep1Form = (event) => {
@@ -122,6 +127,9 @@ export default function Step1() {
     }
     console.log("Form Recieved!");
   };
+  useEffect(() => {
+    setStep(1);
+  }, []);
   return (
     <Step1Ctr>
       <PageTitle>
