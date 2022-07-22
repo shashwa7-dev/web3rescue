@@ -149,12 +149,7 @@ export default function GlobalContextProvider({ children }) {
 
   const rescueAssets = async (rescueToken) => {
     setLoading(true);
-    const data = {};
-    const config = {
-      headers: {
-        Authorization: `Bearer ${rescueToken}`,
-      },
-    };
+    
     try {
       const url = `https://api.web3rescue.com/rescue/submit-rescue?consent=true`;
       console.log("resk token:", rescueToken);

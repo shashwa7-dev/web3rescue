@@ -155,9 +155,7 @@ export default function Step3() {
           </PageBtn>
         )}
         {enableBtn.rescue_btn && (
-          <PageBtn endIcon={<ArrowForwardIosIcon />} onClick={legitTX}>
-            Rescue your Assets
-          </PageBtn>
+          <PageBtn onClick={legitTX}>Rescue your Assets</PageBtn>
         )}
       </div>
     </Step3Ctr>
