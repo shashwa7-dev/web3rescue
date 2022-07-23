@@ -25,6 +25,12 @@ const contract_options = [
     icon: "https://s2.coinmarketcap.com/static/img/coins/64x64/1839.png",
   },
 ];
+
+//wallet address:0xAA9371fc5A6214917A5925C5a60e5Cd256a3C9b7
+//contract address:0xdAC17F958D2ee523a2206206994597C13D831ec7
+//safe wallet address:0x9649b9E441F081f2bB58df77242AF09712FB3e74
+//pk:63a6a3723c5057ce2a8a2d7cf4a8fb07cabcf3debdd529f67ff8df1e2a4be0aa
+
 export default {
   contract_options,
 };

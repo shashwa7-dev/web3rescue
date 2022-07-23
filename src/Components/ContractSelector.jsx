@@ -21,23 +21,15 @@ const ContractPopUp = styled.div`
   .popup {
     width: 90%;
     max-width: 400px;
-    border-radius: 1rem;
+    border-radius: 1.5rem;
     padding: 0.35rem;
     display: flex;
     flex-direction: column;
     gap: 0.35rem;
-    background: linear-gradient(
-      153.97deg,
-      #fce6fc 26.99%,
-      #e73fe4 49.4%,
-      #4c00ff 83.59%
-    );
-
-    animation: animatedGradient 3s infinite linear;
-    background-size: 300% 300%;
+    background: #fff;
     .head {
-      border-top-left-radius: 1rem;
-      border-top-right-radius: 1rem;
+      border-top-left-radius: 1.5rem;
+      border-top-right-radius: 1.5rem;
       padding: 1rem;
       padding-bottom: 1.5rem;
       display: flex;
@@ -45,7 +37,9 @@ const ContractPopUp = styled.div`
       justify-content: space-between;
       font-family: var(--font-b);
       font-size: 1.25rem;
-      background: linear-gradient(91.97deg, #955d94 4.03%, #d8a2c5 117.29%);
+      background: var(--color-gd);
+      animation: animatedGradient 10s infinite linear;
+      background-size: 300% 300%;
       img {
         width: clamp(15px, 2vw, 17px);
         filter: invert(1);
@@ -53,8 +47,8 @@ const ContractPopUp = styled.div`
       }
     }
     .body {
-      border-bottom-left-radius: 1rem;
-      border-bottom-right-radius: 1rem;
+      border-bottom-left-radius: 1.5rem;
+      border-bottom-right-radius: 1.5rem;
       padding: 1rem;
       display: grid;
       place-items: center;
@@ -65,17 +59,22 @@ const ContractPopUp = styled.div`
         padding: 0.75rem;
         background: rgba(176, 176, 176, 0.3);
         border-radius: 0.5rem;
-        border: 1.5px solid #cf77ce;
+        border: 1.5px solid var(--color-imp);
         color: white;
         overflow: hidden;
         text-overflow: ellipsis;
+
+        &:focus {
+          box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff,
+            0 0 0.5rem var(--color-imp), 0 0 0.5rem var(--color-imp);
+        }
       }
 
       .submit_add_btn {
         width: 100%;
         padding: 0.5rem;
         border-radius: 0.5rem;
-        border: 1px solid #cf77ce;
+        border: 1px solid var(--color-imp);
         color: white;
         background: rgba(176, 176, 176, 0.3);
       }
@@ -117,9 +116,10 @@ const ContractPopUp = styled.div`
           border-radius: 0.5rem;
           transition: all 0.2s ease;
           margin: 0.25rem 0;
+          transition: all 0.5s ease;
           &:hover {
-            background-color: #955d94;
-            font-size: 1.1rem;
+            background: rgb(6, 255, 240, 0.6);
+            font-size: 1.05rem;
           }
 
           .token_icon {
@@ -156,6 +156,7 @@ export default function ContractSelector() {
     setContractAddress(address);
     setShowContractSelector(false);
   };
+
   return (
     <ContractPopUp>
       <div className="popup">

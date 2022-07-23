@@ -2,6 +2,7 @@ import React from "react";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
+import { toast } from "react-toastify";
 import styled from "styled-components";
 import { copy_icon, eth_icon } from "../Assets/assets";
 import { PageBtn, PageTitle } from "../Components/commons";
@@ -95,9 +96,11 @@ export default function Step3() {
   };
   const simulateTX = async () => {
     const sim_status = await simulatePaymentTransaction(rescueToken);
-    console.log("sim_status:", sim_status);
     if (sim_status.success) {
+      toast.success("Txn Simulation Success.");
       setEnableBtn({ secure_btn: false, rescue_btn: true });
+    } else {
+            toast.error("Txn Failed: nonce too low.");
     }
   };
 
@@ -116,7 +119,8 @@ export default function Step3() {
     setStep(3);
     const paymentStatus = window.setInterval(async () => {
       const status = await checkOrderStatus();
-      if (!status.settled) {
+      if (status.settled) {
+        //clear fetch once payment is settled
         window.clearInterval(paymentStatus);
       }
     }, 1000);

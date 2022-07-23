@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 const AppTitle = styled.h1`
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(3rem, 5vw, 4rem);
   letter-spacing: 1.5px;
 `;
 const PageForm = styled.form`
@@ -27,27 +27,32 @@ const PageInput = styled.input`
   font-size: clamp(1rem, 2vw, 1.25rem);
   background: rgba(176, 176, 176, 0.3);
   border-radius: 8px;
-  padding: clamp(1.1rem, 3vw, 1.35rem);
+  padding: 1rem;
   color: white;
   border: none;
 `;
 const PageBtn = styled.button`
-  background: linear-gradient(91.97deg, #955d94 4.03%, #d8a2c5 117.29%);
+  background: var(--color-gd);
   border-radius: 12px;
-  width: 200px;
+  min-width: 200px;
   margin: 0 1em;
   font-family: var(--font-b);
   color: white;
-  font-size: clamp(1.1rem, 2vw, 1.5rem);
-  padding: 0.75rem;
-  min-width: fit-content;
-  border: none;
-  transition: all .5s ease;
+  font-size: clamp(1.1rem, 2vw, 1.25rem);
+  padding: 0.75rem 1.25rem;
+  border: 1.5px solid white;
+  transition: all 0.5s ease;
   cursor: pointer;
 
   &:hover {
-    background: var(--color-gd);
     transform: scale(1.02);
+
+    //neon box
+    color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 0 0.2rem #fff, 0 0 0.2rem #fff, 0 0 1.1rem var(--color-imp),
+      0 0 0.8rem var(--color-imp), 0 0 1.5rem var(--color-imp),
+      inset 0 0 1.1rem var(--color-imp);
   }
 `;
 export { AppTitle, PageInput, PageTitle, PageForm, PageBtn };

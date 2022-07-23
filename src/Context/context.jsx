@@ -3,6 +3,8 @@ import { FlashbotsBundleProvider } from "@flashbots/ethers-provider-bundle";
 import axios from "axios";
 import { ethers } from "ethers";
 import jwt_decode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const GlobalContext = createContext({});
 
@@ -22,7 +24,7 @@ export default function GlobalContextProvider({ children }) {
   });
   const [contractAddress, setContractAddress] = useState(null);
   const [showContractSelector, setShowContractSelector] = useState(false);
-
+  const navigate = useNavigate();
   //helper methods
 
   //STEP:1 mthd
@@ -46,11 +48,15 @@ export default function GlobalContextProvider({ children }) {
       const tx = await datafromresponse.data;
       console.log("tx", tx);
       localStorage.setItem("raw_tx", JSON.stringify(tx));
-      setLoading(false);
       setStep(1);
+      navigate("/step2");
+      toast.success("Txn Created.");
       return tx;
     } catch (err) {
+      navigate("/"); //step1
+      toast.error("Invalid Credential.");
       console.log("Error:", err.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -78,11 +84,13 @@ export default function GlobalContextProvider({ children }) {
           transaction: tx2,
         },
       ]);
-      setLoading(false);
+      toast.success("Txn Signed Successfully.");
       return signedTxBundle;
     } catch (err) {
-      setLoading(false);
+      toast.error("Invalid Private Key.");
       console.log("Sign error:", err.message);
+    } finally {
+      setLoading(false);
     }
   };
   //@api_call: 2
@@ -103,12 +111,14 @@ export default function GlobalContextProvider({ children }) {
       };
       const datafromresponse = await axios.post(url, data);
       const tx = await datafromresponse.data;
-      setLoading(false);
       setStep(2);
+      toast.success("Rescue Initiated.");
       return tx;
     } catch (err) {
-      setLoading(false);
+      toast.error("Rescue Request Failed.");
       console.log("Error:", err.data);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -135,30 +145,31 @@ export default function GlobalContextProvider({ children }) {
       const url = `https://api.web3rescue.com/rescue/submit-rescue`;
       console.log("resk token:", rescueToken);
       const sim_status = await axios.post(url, data, config);
-      setLoading(false);
       if (!sim_status.data.success) {
         console.log(sim_status.data.result.data);
         setError(sim_status.data.result.data);
       }
       return sim_status.data;
     } catch (err) {
-      setLoading(false);
+      toast.error("Txn Simulation Failed.");
       console.log("Simulation error:", err.message);
+    } finally {
+      setLoading(false);
     }
   };
 
   const rescueAssets = async (rescueToken) => {
     setLoading(true);
-    
     try {
       const url = `https://api.web3rescue.com/rescue/submit-rescue?consent=true`;
       console.log("resk token:", rescueToken);
       const rescue_status = await axios.post(url, data, config);
-      setLoading(false);
       return rescue_status.data;
     } catch (err) {
-      setLoading(false);
+      toast.error("Assets Rescue Failed.");
       console.log("Rescue error:", err.message);
+    } finally {
+      setLoading(false);
     }
   };
   const decodeJWT_token = (token) => jwt_decode(token);

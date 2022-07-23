@@ -59,7 +59,7 @@ const TimelineCtr = styled.div`
 `;
 
 const activeStage = {
-  background: "linear-gradient(268.5deg, #FB03F5 -11.69%, #AA9CFF 112.48%)",
+  background: "var(--color-gd2)",
 };
 const items = ["Enter Details", "Sign Transaction", "Pay & Rescue"];
 

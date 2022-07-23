@@ -23,14 +23,20 @@
 }
 
 :root {
-  --max-width: 650px;
+  --max-width: 800px;
   --field-bg: rgba(176, 176, 176, 0.3);
   --font-source-code: "Source Code Pro", monospace;
   --font-rg: hellix-400, monospace;
   --font-m: hellix-500, monospace;
   --font-b: hellix-700, monospace;
-  --color-imp: #fb03f5;
-  --color-gd: linear-gradient(268.5deg, #fb03f5 -11.69%, #aa9cff 112.48%);
+  --color-imp: #06fff0;
+  --color-gd: linear-gradient(
+    91.97deg,
+    #06fff0 4.03%,
+    #7000ff 70.51%,
+    #e116ad 102.82%
+  );
+  --color-gd2: linear-gradient(91.97deg, #06fff0 4.03%, #7000ff 117.29%);
 }
 /* Remove default margin */
 body,
@@ -57,14 +63,19 @@ html:focus-within {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  height: 100%;
+}
 /* Set core body defaults */
 body {
-  min-height: 100vh;
+  display: grid;
+  place-items: center;
   text-rendering: optimizeSpeed;
   line-height: 1.25;
   font-family: var(--font-rg);
   color: white;
-  background: url("./Assets/Images/bg.png") no-repeat center;
+  background: url("./Assets/Images/bg.svg") no-repeat center;
   background-size: cover;
 }
 
@@ -113,17 +124,16 @@ input[type="search"]::-webkit-search-cancel-button {
 /*App classes*/
 .App {
   width: 100%;
-  min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  gap: 2rem;
   align-items: center;
+  gap: 2rem;
   padding: clamp(0.5rem, 2vw, 1rem);
   padding-top: 2rem;
 }
 .app_content {
   width: 100%;
-  min-height: 100vh;
   position: relative;
 }
 

@@ -1,4 +1,5 @@
 import React from "react";
+import { useRef } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -8,6 +9,7 @@ import { PageBtn, PageForm, PageInput, PageTitle } from "../Components/commons";
 import { useGCtx } from "../Context/context";
 
 const Step1Ctr = styled.div`
+  width: 100%;
   .contract_selector {
     --borderWidth: 8px;
     width: 60%;
@@ -26,14 +28,13 @@ const Step1Ctr = styled.div`
       border-bottom-left-radius: 8px;
       width: 55%;
       cursor: pointer;
-      padding: clamp(1.1rem, 3vw, 1.35rem);
+      padding: 1rem;
       .token_address {
         display: flex;
         align-items: center;
         gap: 0.5rem;
         img {
           width: 18px;
-          filter: invert(1);
         }
       }
       .tooltiptext {
@@ -85,12 +86,13 @@ export default function Step1() {
   const {
     setStep,
     contractAddress,
+    setContractAddress,
     userData,
     setUserData,
     setShowContractSelector,
     generateERC20Transferdata,
   } = useGCtx();
-
+  const step1FormRef = useRef();
   const navigate = useNavigate(null);
   const [addressCopied, setAddressCopied] = useState(false);
 
@@ -108,16 +110,17 @@ export default function Step1() {
   };
 
   const proceedSubmission = async () => {
+    step1FormRef.current.reset();
     const finalData = await generateERC20Transferdata(
       userData?.comp_add,
       contractAddress,
       userData?.safe_add
     );
+    console.log("final data:", finalData);
     setUserData({
       ...userData,
       final_data: finalData,
     });
-    navigate("/step2");
   };
 
   const handleStep1Form = (event) => {
@@ -125,9 +128,10 @@ export default function Step1() {
     if (contractAddress) {
       proceedSubmission();
     }
-    console.log("Form Recieved!");
   };
+
   useEffect(() => {
+    setContractAddress(null);
     setStep(1);
   }, []);
   return (
@@ -135,7 +139,7 @@ export default function Step1() {
       <PageTitle>
         Submit info so we can generate a rescue transaction data for rescue.
       </PageTitle>
-      <PageForm onSubmit={handleStep1Form}>
+      <PageForm onSubmit={handleStep1Form} ref={step1FormRef}>
         <PageInput
           type="text"
           placeholder="Enter your compromised wallet address*"
@@ -153,7 +157,11 @@ export default function Step1() {
             {contractAddress ? (
               <div className="token_address">
                 <span>{trimAddress(contractAddress)}</span>
-                <img src={copy_icon} alt="copy" />
+                <img
+                  src={copy_icon}
+                  alt="copy"
+                  style={{ filter: "invert(-1)" }}
+                />
               </div>
             ) : (
               <span style={{ color: "gray" }}>Your token ?</span>

@@ -34,7 +34,7 @@ const Step2Ctr = styled.div`
       color: var(--color-imp);
     }
     .signed_tx {
-      color: aqua;
+      color: #ff904f;
     }
   }
   .userPKip {
@@ -107,7 +107,7 @@ export default function Step2() {
       userData.final_data,
       pk.val
     );
-    setSignBundle(signedTx[0]);
+    if (signedTx) setSignBundle(signedTx[0]);
   };
 
   const sendSignedBundle = async () => {
@@ -133,6 +133,7 @@ export default function Step2() {
   };
   useEffect(() => {
     scrollToBottomWithSmoothScroll();
+    if (userData.comp_add === "") navigate("/");
     setStep(2);
   }, [data_tx]);
 

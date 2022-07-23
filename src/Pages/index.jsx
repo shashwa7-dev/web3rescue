@@ -8,17 +8,18 @@ import { useGCtx } from "../Context/context.jsx";
 
 const AppContainer = styled.div`
   width: 100%;
-  max-width: 1010px;
+ max-width: 800px;
   overflow: hidden;
   padding: clamp(1rem, 3vw, 2rem);
-  display: grid;
-  place-items: center;
-  gap: 4rem;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 3rem;
   background: rgba(28, 28, 28, 0.7);
   border-radius: 16px;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-  backdrop-filter: blur(7.5px);
-  -webkit-backdrop-filter: blur(7.5px);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(28, 28, 28, 0.3);
 `;
 
